@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
   KeyboardAvoidingView,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Keyboard
 } from 'react-native';
 
 import Task from './components/Task';
 
 export default function App() {
+  const [task, setTask] = useState();
+
+  const handleAddTask = () => {
+    consle.log(task);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.tasksWrapper}>
@@ -27,9 +34,14 @@ export default function App() {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.writeTaskWrapper}
       >
-        <TextInput style={styles.input} placeholder={'Add New Task'} />
+        <TextInput
+          style={styles.input}
+          placeholder={'Add New Task'}
+          value={task}
+          onChangeText={(text) => setTask(text)}
+        />
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handleAddTask()}>
           <View styles={styles.addWrapper}>
             <Text style={styles.addText}></Text>
           </View>
@@ -60,7 +72,7 @@ const styles = StyleSheet.create({
     bottom: 60,
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
   input: {
@@ -74,6 +86,13 @@ const styles = StyleSheet.create({
     width: 250
   },
   addWrapper: {
-    widht
+    width: 60,
+    height: 60,
+    borderColor: '#C0C0C0',
+    backgroundColor: '#fff',
+    borderRadius: 60,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
